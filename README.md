@@ -2,12 +2,12 @@
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red?logo=pytorch)
-![Colab](https://img.shields.io/badge/Google%20Colab-GPU%20T4-orange?logo=googlecolab)
+![Kaggle](https://img.shields.io/badge/Kaggle-GPU%20T4-20BEFF?logo=kaggle)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 Trabajo Práctico Final — Visión por Computadora  
 **Autores:** Mauro Virgilio Blanc · Juan Pablo Imbrigno · Andrea Ferenaz  
-**Año:** 2025
+**Año:** 2026
 
 ---
 
@@ -17,8 +17,8 @@ Sistema de diagnóstico asistido por inteligencia artificial para la detección 
 
 | Tarea | Modelos | Mejor resultado |
 |---|---|---|
-| **Clasificación multiclase** | CNN Base, ResNet-50, EfficientNet-B0 | ResNet-50: **99.00% accuracy** |
-| **Segmentación semántica** | U-Net | **Dice Score: 0.8291** |
+| **Clasificación multiclase** | CNN Base, ResNet-50, EfficientNet-B0 | ResNet-50: **98.30% accuracy** |
+| **Segmentación semántica** | U-Net | **Dice Score: 0.8381** |
 
 ### Clases detectadas
 - 🔴 **Glioma** — tumor maligno de células gliales
@@ -34,9 +34,9 @@ Sistema de diagnóstico asistido por inteligencia artificial para la detección 
 
 | Modelo | Accuracy | F1 Macro | AUC-ROC | Parámetros |
 |---|---|---|---|---|
-| CNN Base (baseline) | 91.20% | 0.9171 | 0.9868 | 2.49M |
-| ResNet-50 | **98.30%** | **0.9911** | **0.9985** | 24.03M |
-| EfficientNet-B0 | 97.00% | 0.9721 | 0.9982 | 4.34M |
+| CNN Base (baseline) | 91.20% | 0.9119 | 0.9868 | 2.49M |
+| ResNet-50 | **98.30%** | **0.9848** | **0.9985** | 24.03M |
+| EfficientNet-B0 | 97.00% | 0.9727 | 0.9982 | 4.34M |
 
 ### Segmentación
 
@@ -52,36 +52,31 @@ Sistema de diagnóstico asistido por inteligencia artificial para la detección 
 brain-tumor-classifier/
 │
 ├── 📓 notebook/
-│   └── brain_tumor_classifier.ipynb   # Notebook completo (Colab)
-│
-├── 📁 src/
-│   ├── models.py                      # CNN Base, ResNet-50, EfficientNet-B0, U-Net
-│   ├── dataset.py                     # Datasets de clasificación y segmentación
-│   ├── train.py                       # Loops de entrenamiento
-│   ├── evaluate.py                    # Métricas: F1, AUC-ROC, Dice, IoU
-│   └── gradcam.py                     # Implementación Grad-CAM
+│   └── brain_tumor_classifier.ipynb     # Notebook completo (Kaggle)
 │
 ├── 📁 results/
-│   ├── eda_distribucion.png
-│   ├── eda_mascaras.png
-│   ├── curvas_entrenamiento.png
-│   ├── matrices_confusion.png
-│   ├── curvas_roc_por_clase.png
-│   ├── gradcam_resnet50.png
-│   ├── gradcam_efficientnet_b0.png
-│   └── predicciones_unet.png
+│   ├── eda_distribucion.png             # Distribución de clases
+│   ├── eda_mascaras.png                 # Pares imagen/máscara
+│   ├── curvas_entrenamiento.png         # Loss y accuracy por época
+│   ├── matrices_confusion.png          # Matrices normalizadas x3
+│   ├── curvas_roc_por_clase.png        # AUC-ROC x3 modelos
+│   ├── curvas_roc_comparativa.png      # ROC superpuesto
+│   ├── gradcam_resnet50.png            # Grad-CAM ResNet
+│   ├── gradcam_efficientnet_b0.png     # Grad-CAM EfficientNet
+│   └── predicciones_unet.png          # Segmentación U-Net
 │
-├── 📄 requirements.txt
-└── 📄 README.md
+├── 📄 README.md
+└── 📄 requirements.txt
 ```
+
+> ⚠️ Los checkpoints (`.pth`) no están incluidos en este repositorio debido a su tamaño (10–124 MB). Ver sección de descarga abajo.
 
 ---
 
 ## 🚀 Instalación y uso
 
 ### Requisitos previos
-- Cuenta de Kaggle (para descargar el dataset)
-- Cuenta de Google (para Google Drive y Colab)
+- Cuenta de Kaggle (para el dataset y ejecutar el notebook)
 
 ### 1. Clonar el repositorio
 
@@ -96,13 +91,26 @@ cd brain-tumor-classifier
 pip install -r requirements.txt
 ```
 
-### 3. Descargar el dataset
+### 3. Descargar el dataset y checkpoints
 
-El proyecto utiliza el dataset **BRISC 2025** disponible en Kaggle:
+**Dataset BRISC 2025:**
 
 👉 [https://www.kaggle.com/datasets/briscdataset/brisc2025](https://www.kaggle.com/datasets/briscdataset/brisc2025)
 
-Estructura esperada después de descargar:
+**Checkpoints de los modelos entrenados:**
+
+👉 [https://www.kaggle.com/tu-usuario/brain-tumor-classifier/output](https://www.kaggle.com/tu-usuario/brain-tumor-classifier/output)
+
+Descargá los siguientes archivos y colocálos en una carpeta `models/`:
+
+| Archivo | Tamaño | Descripción |
+|---|---|---|
+| `cls_cnn_base.pth` | 10 MB | CNN Base (baseline) |
+| `cls_resnet50.pth` | 96 MB | ResNet-50 fine-tuned |
+| `cls_efficientnet_b0.pth` | 17 MB | EfficientNet-B0 fine-tuned |
+| `seg_unet.pth` | 124 MB | U-Net segmentación |
+
+Estructura esperada del dataset después de descargar:
 ```
 brisc2025/
 ├── classification_task/
@@ -121,19 +129,21 @@ brisc2025/
         └── (mismas carpetas)
 ```
 
-### 4. Ejecutar en Google Colab
+### 4. Ejecutar en Kaggle
 
-1. Subir el dataset a Google Drive
-2. Abrir [Google Colab](https://colab.research.google.com)
+1. Ir a [kaggle.com/code](https://kaggle.com/code) → **New Notebook**
+2. Agregar el dataset BRISC 2025 como input
 3. Subir `notebook/brain_tumor_classifier.ipynb`
-4. Activar GPU: `Entorno de ejecución → Cambiar tipo → GPU T4`
-5. Actualizar la variable `BRISC_DIR` con tu ruta de Drive:
+4. Activar GPU: `Settings → Accelerator → GPU T4`
+5. Ejecutar todas las celdas en orden
 
-```python
-BRISC_DIR = '/content/drive/MyDrive/tu-carpeta/brisc2025'
-```
+---
 
-6. Ejecutar todas las celdas en orden
+## ⚠️ Notas sobre los modelos
+
+Los checkpoints (`.pth`) **no están incluidos en este repositorio** debido a su tamaño (10–124 MB cada uno). Están disponibles para descarga directa desde la salida del notebook en Kaggle (ver link arriba).
+
+Para reproducir el entrenamiento completo desde cero, ejecutar el notebook en Kaggle con GPU T4 activada. El tiempo estimado de entrenamiento es de **3–4 horas** para los 4 modelos completos.
 
 ---
 
@@ -195,7 +205,7 @@ Hiperparámetros utilizados:
 | Optimizer | Adam |
 | LR Scheduler | ReduceLROnPlateau (factor=0.5, patience=3) |
 | Early stopping | Paciencia = 5 épocas |
-| Hardware | GPU NVIDIA Tesla T4 |
+| Hardware | GPU NVIDIA Tesla T4 (Kaggle) |
 
 ---
 
