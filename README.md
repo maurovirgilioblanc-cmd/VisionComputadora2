@@ -35,14 +35,14 @@ Sistema de diagnóstico asistido por inteligencia artificial para la detección 
 | Modelo | Accuracy | F1 Macro | AUC-ROC | Parámetros |
 |---|---|---|---|---|
 | CNN Base (baseline) | 91.20% | 0.9171 | 0.9868 | 2.49M |
-| ResNet-50 | **99.00%** | **0.9911** | **0.9985** | 24.03M |
-| EfficientNet-B0 | 97.10% | 0.9721 | 0.9982 | 4.34M |
+| ResNet-50 | **98.30%** | **0.9911** | **0.9985** | 24.03M |
+| EfficientNet-B0 | 97.00% | 0.9721 | 0.9982 | 4.34M |
 
 ### Segmentación
 
 | Modelo | Dice Score | IoU |
 |---|---|---|
-| U-Net | **0.8291** | **0.7168** |
+| U-Net | **0.8381** | **0.7296** |
 
 ---
 
@@ -80,8 +80,8 @@ brain-tumor-classifier/
 ## 🚀 Instalación y uso
 
 ### Requisitos previos
-- Cuenta de Google (para Google Colab)
 - Cuenta de Kaggle (para descargar el dataset)
+- Cuenta de Google (para Google Drive y Colab)
 
 ### 1. Clonar el repositorio
 
