@@ -17,8 +17,8 @@ Sistema de diagnóstico asistido por inteligencia artificial para la detección 
 
 | Tarea | Modelos | Mejor resultado |
 |---|---|---|
-| **Clasificación multiclase** | CNN Base, ResNet-50, EfficientNet-B0 | ResNet-50: **98.30% accuracy** |
-| **Segmentación semántica** | U-Net | **Dice Score: 0.8381** |
+| **Clasificación multiclase** | CNN Base (96.40% accuracy, ResNet-50 (98.70% accuracy), EfficientNet-B0 (97.50% accuracy) | ResNet-50: **98.70% accuracy** |
+| **Segmentación semántica** | U-Net | **Dice Score: 0.8434** |
 
 ### Clases detectadas
 - 🔴 **Glioma** — tumor maligno de células gliales
@@ -34,15 +34,15 @@ Sistema de diagnóstico asistido por inteligencia artificial para la detección 
 
 | Modelo | Accuracy | F1 Macro | AUC-ROC | Parámetros |
 |---|---|---|---|---|
-| CNN Base (baseline) | 91.20% | 0.9119 | 0.9868 | 2.49M |
-| ResNet-50 | **98.30%** | **0.9848** | **0.9985** | 24.03M |
-| EfficientNet-B0 | 97.00% | 0.9727 | 0.9982 | 4.34M |
+| CNN Base (baseline) | 96.40% | 0.9666 | 0.9966 | 2.49M |
+| ResNet-50 | **98.70%** | **0.9880** | **0.9996** | 24.03M |
+| EfficientNet-B0 | 97.50% | 0.9754 | 0.9991 | 4.34M |
 
 ### Segmentación
 
 | Modelo | Dice Score | IoU |
 |---|---|---|
-| U-Net | **0.8381** | **0.7296** |
+| U-Net | **0.8434** | **0.7220** |
 
 ---
 
@@ -93,9 +93,13 @@ pip install -r requirements.txt
 
 ### 3. Descargar el dataset y checkpoints
 
-**Dataset BRISC 2025:**
+**Dataset BRISC 2025(Entrenamiento y Evaluación):**
 
 👉 [https://www.kaggle.com/datasets/briscdataset/brisc2025](https://www.kaggle.com/datasets/briscdataset/brisc2025)
+
+**Dataset Brain Tumor MRI Dataset (Validación):**
+
+👉 [https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset](https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset)
 
 **Checkpoints de los modelos entrenados:**
 
@@ -110,7 +114,7 @@ Descargá los siguientes archivos y colocálos en una carpeta `models/`:
 | `cls_efficientnet_b0.pth` | 17 MB | EfficientNet-B0 fine-tuned |
 | `seg_unet.pth` | 124 MB | U-Net segmentación |
 
-Estructura esperada del dataset después de descargar:
+Estructura esperada del dataset BRISC 2025 después de descargar:
 ```
 brisc2025/
 ├── classification_task/
@@ -129,13 +133,29 @@ brisc2025/
         └── (mismas carpetas)
 ```
 
+Estructura esperada del dataset Brain Tumor MRI Dataset después de descargar:
+```
+/
+├── Testing/
+│   ├── glioma/
+│   ├── meningioma/
+│   ├── notumor/
+│   └── pituitary/
+└── Training/
+    ├── glioma/
+    ├── meningioma/
+    ├── notumor/
+    └── pituitary/
+```
+
 ### 4. Ejecutar en Kaggle
 
-1. Ir a [kaggle.com/code](https://kaggle.com/code) → **New Notebook**
+1. Ir a [kaggle.com/code](https://kaggle.com/code) 
 2. Agregar el dataset BRISC 2025 como input
-3. Subir `notebook/brain_tumor_classifier.ipynb`
-4. Activar GPU: `Settings → Accelerator → GPU T4`
-5. Ejecutar todas las celdas en orden
+3. Agregar el dataset Brain Tumor MRI Dataset como input
+4. Subir `notebook/brain_tumor_classifier.ipynb`
+5. Activar GPU: `Settings → Accelerator → GPU T4`
+6. Ejecutar todas las celdas en orden
 
 ---
 
