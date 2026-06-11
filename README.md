@@ -260,13 +260,21 @@ cam, pred, confianza = gradcam.generate(img_tensor)
 
 ---
 
-## 📚 Referencias
+## 📚 Referencias Bibliográficas
 
-1. Ronneberger et al., "U-Net: Convolutional Networks for Biomedical Image Segmentation," MICCAI 2015
-2. He et al., "Deep Residual Learning for Image Recognition," CVPR 2016
-3. Tan & Le, "EfficientNet: Rethinking Model Scaling for CNNs," ICML 2019
-4. Selvaraju et al., "Grad-CAM: Visual Explanations from Deep Networks," ICCV 2017
-5. Sajjad et al., "Multi-Grade Brain Tumor Classification Using Deep CNN," Journal of Computational Science 2019
+### 1. Manuales y Tratados de Diagnóstico Clínico (Medicina / Neurorradiología)
+* **Pedrosa, C. S., & Casanova, R.** (Eds.). *Compendio de Diagnóstico por Imagen*. Editorial Médica Panamericana. *(Referencia fundamental para el Diagnóstico Diferencial [ddx] en Neurorradiología)*.
+* **Osborn, A. G.** *Handbook of Neurorradiology* (o *Osborn's Brain*). Elsevier. *(Manual de referencia para la identificación anatómica y estadificación de lesiones en el Sistema Nervioso Central)*.
+
+### 2. Investigación en Clasificación de Tumores Cerebrales y Deep Learning
+* **Sajjad, M.**, Khan, S., Muhammad, K., Wu, W., Ullah, A., & Baik, S. W. (2019). *Multi-Grade Brain Tumor Classification Using Deep CNN*. Journal of Computational Science, 30, 1-8. *(Paper eje que valida el uso de redes convolucionales para la clasificación multiclase de grados tumorales)*.
+
+### 3. Arquitecturas Base y Modelos Convolucionales (CNN)
+* **He, K.**, Zhang, X., Ren, S., & Sun, J. (2016). *Deep Residual Learning for Image Recognition*. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR). *(Desarrollo de ResNet y bloques residuales)*.
+* **Tan, M.**, & Le, Q. (2019). *EfficientNet: Rethinking Model Scaling for CNNs*. In International Conference on Machine Learning (ICML). *(Optimización y escalado eficiente de redes de visión)*.
+
+### 4. Segmentación Biomédica y Localización Espacial
+* **Ronneberger, O.**, Fischer, P., & Brox, T. (2015). *U-Net: Convolutional Networks for Biomedical Image Segmentation*. In International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI). *(Arquitectura reina para la delimitación del contorno tumoral píxel a píxel)*.
 
 ---
 
